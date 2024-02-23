@@ -35,7 +35,16 @@ function displayBooks(library){
         delete myLibrary[deleteButton.value]
         displayBooks(myLibrary)
       })
+
+      let readButton = document.createElement("button");
+      readButton.value = index;
+      readButton.textContent = 'Toggle Read'
+      readButton.addEventListener('click', () =>{
+        myLibrary[readButton.value].read = !myLibrary[readButton.value].read
+        displayBooks(myLibrary)
+      })
       tr.appendChild(deleteButton)
+      tr.appendChild(readButton)
       tableBody.appendChild(tr)
     } 
   }
