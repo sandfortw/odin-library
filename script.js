@@ -1,6 +1,7 @@
 const myLibrary = [];
 const bookButton = document.querySelector("#book-button");
-const dialogForm = document.querySelector("dialog");
+const dialogBox = document.querySelector("dialog");
+const dialogForm = document.querySelector("dialog form");
 const submitButton = document.querySelector("#submit-button");
 const closeButton = document.querySelector("#close-button");
 
@@ -11,7 +12,7 @@ function Book(title, author, pageCount, read = false) {
   this.read = read;
   this.toggleRead = () => {
     this.read = !this.read;
-  }
+  };
 }
 
 function addBookToLibrary(book) {
@@ -61,7 +62,7 @@ const addReadButton = (object) => {
   readButton.textContent = "Toggle Read";
   readButton.addEventListener("click", () => {
     const libraryBook = myLibrary[readButton.value];
-    libraryBook.toggleRead()
+    libraryBook.toggleRead();
     displayBooks(myLibrary);
   });
   object.tr.appendChild(readButton);
@@ -81,11 +82,11 @@ function displayBooks(library) {
 }
 
 bookButton.addEventListener("click", () => {
-  dialogForm.showModal();
+  dialogBox.showModal();
 });
 
 closeButton.addEventListener("click", () => {
-  dialogForm.close();
+  dialogBox.close();
 });
 
 submitButton.addEventListener("click", (event) => {
@@ -100,4 +101,6 @@ submitButton.addEventListener("click", (event) => {
   );
   addBookToLibrary(book);
   displayBooks(myLibrary);
+  dialogForm.reset();
+  dialogBox.close();
 });
