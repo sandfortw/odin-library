@@ -17,16 +17,28 @@ function addBookToLibrary(book) {
 
 function displayBooks(library){
   tableBody = document.querySelector('tbody')
-  library.forEach(book => {
-    let tr = document.createElement("tr");
-    let attributes = ["title", "author", "pageCount", "read"];
-    attributes.forEach(attribute => {
-      let td = document.createElement("td")
-      td.textContent = book[attribute];
-      tr.appendChild(td)
-    })
-    tableBody.appendChild(tr)
-  });
+  tableBody.innerHTML = '';
+  for (let index = 0; index < library.length; index++) {
+    const book = library[index];
+    if(book != undefined) {
+      let tr = document.createElement("tr");
+      let attributes = ["title", "author", "pageCount", "read"];
+      attributes.forEach(attribute => {
+        let td = document.createElement("td")
+        td.textContent = book[attribute];
+        tr.appendChild(td)
+      })
+      let deleteButton = document.createElement("button");
+      deleteButton.value = index;
+      deleteButton.textContent = 'Delete'
+      deleteButton.addEventListener('click', () =>{
+        delete myLibrary[deleteButton.value]
+        displayBooks(myLibrary)
+      })
+      tr.appendChild(deleteButton)
+      tableBody.appendChild(tr)
+    } 
+  }
 }
 
 const bookButton = document.querySelector("#book-button")
