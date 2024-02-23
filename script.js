@@ -29,7 +29,26 @@ function displayBooks(library){
   });
 }
 
-let book1 = new Book('Return of the King', 'Tolkien', '200')
+const bookButton = document.querySelector("#book-button")
+const dialogForm = document.querySelector('dialog')
+const submitButton = document.querySelector('#submit-button')
 
-addBookToLibrary(book1)
-displayBooks(myLibrary)
+bookButton.addEventListener('click', () =>{
+  dialogForm.showModal();
+})
+
+const closeButton = document.querySelector("#close-button");
+
+closeButton.addEventListener("click", () => {
+  dialogForm.close();
+});
+
+submitButton.addEventListener("click", (event) =>{
+  event.preventDefault();
+  const inputs = document.querySelectorAll("input")
+  const radioSelection = document.querySelector('input[name="read"]:checked')
+  const book = new Book(inputs[0].value, inputs[1].value, inputs[2].value, radioSelection.value)
+  addBookToLibrary(book)
+  displayBooks(myLibrary)
+})
+
