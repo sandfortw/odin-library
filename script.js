@@ -9,6 +9,9 @@ function Book(title, author, pageCount, read = false) {
   this.author = author;
   this.pageCount = pageCount;
   this.read = read;
+  this.toggleRead = () => {
+    this.read = !this.read;
+  }
 }
 
 function addBookToLibrary(book) {
@@ -58,7 +61,7 @@ const addReadButton = (object) => {
   readButton.textContent = "Toggle Read";
   readButton.addEventListener("click", () => {
     const libraryBook = myLibrary[readButton.value];
-    libraryBook.read = !libraryBook.read;
+    libraryBook.toggleRead()
     displayBooks(myLibrary);
   });
   object.tr.appendChild(readButton);
